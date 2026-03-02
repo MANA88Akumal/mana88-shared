@@ -1,0 +1,79 @@
+import { Outlet } from 'react-router-dom'
+import { palette } from '../theme/tokens.js'
+import { Sidebar } from './Sidebar.jsx'
+import { TopBar } from './TopBar.jsx'
+
+/**
+ * Unified application shell — wraps each MANA 88 app with sidebar + top bar + content area.
+ *
+ * Usage:
+ * ```jsx
+ * <AppShell
+ *   appId="accounting"
+ *   appSubtitle="Contabilidad"
+ *   navSections={accountingNav}
+ *   notification={{ notifications, unreadCount, onMarkAllRead, onClickNotification }}
+ *   i18n={{ locale, onToggle: () => setLocale(locale === 'es' ? 'en' : 'es') }}
+ *   userEmail={user?.email}
+ *   onSignOut={handleSignOut}
+ *   sidebarFooterSlot={<CurrencyToggle />}
+ *   topBarRightSlot={<CustomButtons />}
+ * >
+ *   <Outlet />
+ * </AppShell>
+ * ```
+ *
+ * @param {object} props
+ * @param {string} props.appId - 'accounting' | 'cms' | 'investors'
+ * @param {string} props.appSubtitle - Shown below MANA 88 in sidebar
+ * @param {Array} props.navSections - Navigation config
+ * @param {object} [props.notification] - Notification bell config
+ * @param {object} [props.i18n] - { locale, onToggle }
+ * @param {string} [props.userEmail]
+ * @param {function} [props.onSignOut]
+ * @param {string[]} [props.appAccess] - Allowed apps for AppSwitcher
+ * @param {React.ReactNode} [props.sidebarFooterSlot] - Extra slot in sidebar footer
+ * @param {React.ReactNode} [props.topBarRightSlot] - Extra slot in top bar right
+ * @param {React.ReactNode} [props.children]
+ */
+export function AppShell({
+  appId,
+  appSubtitle,
+  navSections,
+  notification,
+  i18n,
+  userEmail,
+  onSignOut,
+  appAccess,
+  sidebarFooterSlot,
+  topBarRightSlot,
+  children,
+}) {
+  return (
+    <div className="h-screen flex overflow-hidden" style={{ background: palette.cream }}>
+      <Sidebar
+        appSubtitle={appSubtitle}
+        navSections={navSections}
+        notification={notification}
+        i18n={i18n}
+        userEmail={userEmail}
+        onSignOut={onSignOut}
+        footerSlot={sidebarFooterSlot}
+      />
+
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <TopBar
+          appId={appId}
+          appAccess={appAccess}
+          rightSlot={topBarRightSlot}
+        />
+
+        <main className="flex-1 overflow-auto" style={{ background: palette.cream }}>
+          <div className="max-w-7xl mx-auto p-6">
+            {children || <Outlet />}
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@mana88/shared",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./theme/tenant-vars.css": "./src/theme/tenant-vars.css"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.0",
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

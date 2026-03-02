@@ -1,0 +1,109 @@
+export default {
+  // Shell / Navigation
+  'shell.appSwitcher': 'Cambiar aplicación',
+  'shell.notifications': 'Notificaciones',
+  'shell.noNotifications': 'Sin notificaciones',
+  'shell.markAllRead': 'Marcar todas como leídas',
+  'shell.collapse': 'Colapsar',
+  'shell.expand': 'Expandir',
+  'shell.signOut': 'Cerrar sesión',
+  'shell.currentApp': 'Actual',
+
+  // Language
+  'lang.switchTo': 'English',
+  'lang.es': 'Español',
+  'lang.en': 'English',
+
+  // Common UI
+  'common.loading': 'Cargando...',
+  'common.save': 'Guardar',
+  'common.saving': 'Guardando...',
+  'common.cancel': 'Cancelar',
+  'common.delete': 'Eliminar',
+  'common.edit': 'Editar',
+  'common.create': 'Crear',
+  'common.update': 'Actualizar',
+  'common.apply': 'Aplicar',
+  'common.search': 'Buscar',
+  'common.filter': 'Filtrar',
+  'common.reset': 'Restablecer',
+  'common.all': 'Todos',
+  'common.none': 'Ninguno',
+  'common.yes': 'Sí',
+  'common.no': 'No',
+  'common.ok': 'Aceptar',
+  'common.confirm': 'Confirmar',
+  'common.close': 'Cerrar',
+  'common.back': 'Regresar',
+  'common.next': 'Siguiente',
+  'common.prev': 'Anterior',
+  'common.export': 'Exportar',
+  'common.import': 'Importar',
+  'common.download': 'Descargar',
+  'common.upload': 'Subir',
+  'common.viewAll': 'Ver todos',
+  'common.addNote': 'Agregar nota...',
+  'common.noResults': 'Sin resultados',
+  'common.showing': 'Mostrando {{from}}-{{to}} de {{total}}',
+  'common.entries': 'Registros',
+
+  // Data fields
+  'common.date': 'Fecha',
+  'common.amount': 'Monto',
+  'common.type': 'Tipo',
+  'common.status': 'Estado',
+  'common.actions': 'Acciones',
+  'common.notes': 'Notas',
+  'common.description': 'Descripción',
+  'common.name': 'Nombre',
+  'common.email': 'Correo',
+  'common.phone': 'Teléfono',
+  'common.company': 'Empresa',
+  'common.category': 'Categoría',
+  'common.total': 'Total',
+  'common.subtotal': 'Subtotal',
+  'common.net': 'Neto',
+  'common.from': 'Desde',
+  'common.to': 'Hasta',
+
+  // Statuses
+  'status.pending': 'Pendiente',
+  'status.approved': 'Aprobado',
+  'status.rejected': 'Rechazado',
+  'status.active': 'Activo',
+  'status.inactive': 'Inactivo',
+  'status.completed': 'Completado',
+  'status.cancelled': 'Cancelado',
+  'status.draft': 'Borrador',
+  'status.paid': 'Pagado',
+  'status.partial': 'Parcial',
+  'status.overdue': 'Vencido',
+
+  // Currency
+  'currency.mxn': 'MXN',
+  'currency.usd': 'USD',
+
+  // Time
+  'time.justNow': 'Justo ahora',
+  'time.minutesAgo': 'hace {{count}}m',
+  'time.hoursAgo': 'hace {{count}}h',
+  'time.yesterday': 'Ayer',
+  'time.daysAgo': 'hace {{count}} días',
+
+  // Auth
+  'auth.signIn': 'Iniciar sesión',
+  'auth.signOut': 'Cerrar sesión',
+  'auth.unauthorized': 'Sin autorización',
+  'auth.sessionExpired': 'Sesión expirada',
+
+  // Errors
+  'error.generic': 'Algo salió mal',
+  'error.network': 'Error de conexión',
+  'error.notFound': 'No encontrado',
+  'error.forbidden': 'Acceso denegado',
+  'error.tryAgain': 'Intentar de nuevo',
+
+  // Confirmation
+  'confirm.delete': '¿Estás seguro de eliminar esto?',
+  'confirm.unsavedChanges': 'Tienes cambios sin guardar. ¿Deseas continuar?',
+}

@@ -1,0 +1,9 @@
+/* MANA 88 default brand tokens — overridden per-tenant by TenantProvider */
+:root {
+  --mana-gold: #ce9e62;
+  --mana-red: #c1432e;
+  --mana-silver: #4b6777;
+  --mana-black: #2c2c2c;
+  --mana-cream: #faf8f5;
+  --mana-border: #e8e0d6;
+}
