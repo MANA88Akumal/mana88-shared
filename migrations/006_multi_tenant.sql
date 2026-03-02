@@ -1,9 +1,13 @@
 -- ============================================================
 -- MANA 88 Multi-Tenant Migration
--- Adds tenant isolation to all business tables
+-- Handles pre-existing user_roles table with different schema
+-- Safe to re-run — fully idempotent
 -- ============================================================
 
--- 1. Tenants table
+-- =============================================
+-- PART 1: tenants table
+-- =============================================
+
 CREATE TABLE IF NOT EXISTS tenants (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   slug VARCHAR(50) UNIQUE NOT NULL,
@@ -20,124 +24,365 @@ CREATE TABLE IF NOT EXISTS tenants (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Seed MANA 88 as tenant #1
 INSERT INTO tenants (slug, name, domain, logo_url) VALUES (
   'mana88', 'MANA 88 Akumal', 'manaakumal.com',
   'https://manaakumal.com/wp-content/uploads/2025/06/logo-white-simple.png'
 ) ON CONFLICT (slug) DO NOTHING;
 
--- 2. User roles table (replaces profiles.role + profiles.system_access)
-CREATE TABLE IF NOT EXISTS user_roles (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
-  role VARCHAR(50) NOT NULL,  -- platform_admin, tenant_admin, finance, sales_mgr, broker, investor, viewer
-  app_access JSONB DEFAULT '[]',
-  is_active BOOLEAN DEFAULT TRUE,
-  granted_by UUID REFERENCES auth.users(id),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(user_id, tenant_id)
-);
+-- =============================================
+-- PART 2: Fix existing user_roles table
+-- It already exists with (id int, user_id, role, created_at)
+-- We need to add: tenant_id, app_access, is_active, granted_by
+-- =============================================
 
--- 3. Add tenant_id to accounting tables
-ALTER TABLE accounting_bank_transactions ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE accounting_facturas ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE accounting_cash_log ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE accounting_categories ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE accounting_bank_accounts ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE accounting_notifications ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
+DO $$
+BEGIN
+  -- Add tenant_id if missing
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='tenant_id'
+  ) THEN
+    ALTER TABLE user_roles ADD COLUMN tenant_id UUID REFERENCES tenants(id) ON DELETE CASCADE;
+    RAISE NOTICE 'Added tenant_id to user_roles';
+  END IF;
 
--- Add tenant_id to CMS tables
-ALTER TABLE cases ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE lots ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE brokers ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE payment_schedule ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE cms_payments ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-ALTER TABLE approvals ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
+  -- Add app_access if missing
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='app_access'
+  ) THEN
+    ALTER TABLE user_roles ADD COLUMN app_access JSONB DEFAULT '[]';
+    RAISE NOTICE 'Added app_access to user_roles';
+  END IF;
 
--- Add tenant_id to offers if exists
-DO $$ BEGIN
-  ALTER TABLE offers ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-EXCEPTION WHEN undefined_table THEN NULL;
+  -- Add is_active if missing
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='is_active'
+  ) THEN
+    ALTER TABLE user_roles ADD COLUMN is_active BOOLEAN DEFAULT TRUE;
+    RAISE NOTICE 'Added is_active to user_roles';
+  END IF;
+
+  -- Add granted_by if missing
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='granted_by'
+  ) THEN
+    ALTER TABLE user_roles ADD COLUMN granted_by UUID REFERENCES auth.users(id);
+    RAISE NOTICE 'Added granted_by to user_roles';
+  END IF;
 END $$;
 
--- Add tenant_id to cms_notifications if exists
-DO $$ BEGIN
-  ALTER TABLE cms_notifications ADD COLUMN IF NOT EXISTS tenant_id UUID REFERENCES tenants(id);
-EXCEPTION WHEN undefined_table THEN NULL;
-END $$;
-
--- 4. Backfill all existing data to MANA 88 tenant
+-- Backfill user_roles.tenant_id for existing rows
 DO $$
 DECLARE
   mana_id UUID;
 BEGIN
   SELECT id INTO mana_id FROM tenants WHERE slug = 'mana88';
-
-  -- Accounting tables
-  UPDATE accounting_bank_transactions SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE accounting_facturas SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE accounting_cash_log SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE accounting_categories SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE accounting_bank_accounts SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE accounting_notifications SET tenant_id = mana_id WHERE tenant_id IS NULL;
-
-  -- CMS tables
-  UPDATE cases SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE clients SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE lots SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE brokers SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE payment_schedule SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE cms_payments SET tenant_id = mana_id WHERE tenant_id IS NULL;
-  UPDATE approvals SET tenant_id = mana_id WHERE tenant_id IS NULL;
+  IF mana_id IS NOT NULL THEN
+    UPDATE user_roles SET tenant_id = mana_id WHERE tenant_id IS NULL;
+    UPDATE user_roles SET app_access = '["accounting","cms","investors"]'::jsonb WHERE app_access = '[]'::jsonb OR app_access IS NULL;
+    UPDATE user_roles SET is_active = TRUE WHERE is_active IS NULL;
+  END IF;
 END $$;
 
--- Backfill offers if exists
+-- Now safe to set NOT NULL and add unique constraint
 DO $$
-DECLARE mana_id UUID;
+DECLARE
+  null_count INT;
+BEGIN
+  SELECT count(*) INTO null_count FROM user_roles WHERE tenant_id IS NULL;
+  IF null_count = 0 THEN
+    ALTER TABLE user_roles ALTER COLUMN tenant_id SET NOT NULL;
+  END IF;
+
+  -- Add unique constraint if not already present
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conrelid = 'user_roles'::regclass AND contype = 'u'
+      AND conname = 'user_roles_user_id_tenant_id_key'
+  ) THEN
+    BEGIN
+      ALTER TABLE user_roles ADD CONSTRAINT user_roles_user_id_tenant_id_key UNIQUE(user_id, tenant_id);
+    EXCEPTION WHEN duplicate_table THEN NULL;
+    END;
+  END IF;
+END $$;
+
+-- =============================================
+-- PART 3: Create missing utility tables
+-- =============================================
+
+CREATE TABLE IF NOT EXISTS accounting_notifications (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  recipient_email TEXT NOT NULL,
+  title TEXT NOT NULL,
+  message TEXT,
+  type VARCHAR(50) DEFAULT 'info',
+  is_read BOOLEAN DEFAULT FALSE,
+  link TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS cms_notifications (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),
+  title TEXT NOT NULL,
+  message TEXT,
+  type VARCHAR(50) DEFAULT 'info',
+  is_read BOOLEAN DEFAULT FALSE,
+  link TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS accounting_planning_expenses (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  category VARCHAR(100) NOT NULL,
+  description TEXT,
+  amount NUMERIC(14,2) NOT NULL,
+  currency VARCHAR(3) DEFAULT 'MXN',
+  frequency VARCHAR(20) DEFAULT 'monthly',
+  start_date DATE,
+  end_date DATE,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS accounting_planning_tranches (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(255) NOT NULL,
+  amount NUMERIC(14,2) NOT NULL,
+  currency VARCHAR(3) DEFAULT 'USD',
+  expected_date DATE,
+  status VARCHAR(50) DEFAULT 'planned',
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- =============================================
+-- PART 4: Add tenant_id to all business tables
+-- Uses dynamic SQL — checks table + column existence first
+-- =============================================
+
+DO $$
+DECLARE
+  tbl TEXT;
+  tables_to_alter TEXT[] := ARRAY[
+    'accounting_bank_transactions',
+    'accounting_facturas',
+    'accounting_cash_log',
+    'accounting_categories',
+    'accounting_bank_accounts',
+    'accounting_notifications',
+    'accounting_bank_statements',
+    'accounting_bank_balances',
+    'accounting_factura_conceptos',
+    'accounting_factura_batches',
+    'accounting_chart_of_accounts',
+    'accounting_vendors',
+    'accounting_planning_expenses',
+    'accounting_planning_tranches',
+    'cases',
+    'clients',
+    'lots',
+    'brokers',
+    'payment_schedule',
+    'cms_payments',
+    'approvals',
+    'cms_audit_log',
+    'cms_notifications',
+    'offers',
+    'offer_notes',
+    'documents',
+    'profiles',
+    'project_settings',
+    'cap_table',
+    'investment_tranches',
+    'monthly_revenue',
+    'costs',
+    'saved_scenarios',
+    'scenario_projections',
+    'scenario_financing_mix',
+    'scenario_config',
+    'pricing_phases',
+    'financing_plans',
+    'scenarios'
+  ];
+BEGIN
+  FOREACH tbl IN ARRAY tables_to_alter LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.tables
+      WHERE table_schema = 'public' AND table_name = tbl
+    ) AND NOT EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = tbl AND column_name = 'tenant_id'
+    ) THEN
+      EXECUTE format('ALTER TABLE %I ADD COLUMN tenant_id UUID REFERENCES tenants(id)', tbl);
+      RAISE NOTICE 'Added tenant_id to %', tbl;
+    END IF;
+  END LOOP;
+END $$;
+
+-- =============================================
+-- PART 5: Backfill all existing rows to MANA 88
+-- =============================================
+
+DO $$
+DECLARE
+  mana_id UUID;
+  tbl TEXT;
+  row_count INT;
+  tables_to_backfill TEXT[] := ARRAY[
+    'accounting_bank_transactions',
+    'accounting_facturas',
+    'accounting_cash_log',
+    'accounting_categories',
+    'accounting_bank_accounts',
+    'accounting_notifications',
+    'accounting_bank_statements',
+    'accounting_bank_balances',
+    'accounting_factura_conceptos',
+    'accounting_factura_batches',
+    'accounting_chart_of_accounts',
+    'accounting_vendors',
+    'accounting_planning_expenses',
+    'accounting_planning_tranches',
+    'cases',
+    'clients',
+    'lots',
+    'brokers',
+    'payment_schedule',
+    'cms_payments',
+    'approvals',
+    'cms_audit_log',
+    'cms_notifications',
+    'offers',
+    'offer_notes',
+    'documents',
+    'profiles',
+    'project_settings',
+    'cap_table',
+    'investment_tranches',
+    'monthly_revenue',
+    'costs',
+    'saved_scenarios',
+    'scenario_projections',
+    'scenario_financing_mix',
+    'scenario_config',
+    'pricing_phases',
+    'financing_plans',
+    'scenarios'
+  ];
 BEGIN
   SELECT id INTO mana_id FROM tenants WHERE slug = 'mana88';
-  UPDATE offers SET tenant_id = mana_id WHERE tenant_id IS NULL;
-EXCEPTION WHEN undefined_table THEN NULL;
+  IF mana_id IS NULL THEN
+    RAISE EXCEPTION 'MANA 88 tenant not found';
+  END IF;
+
+  FOREACH tbl IN ARRAY tables_to_backfill LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = tbl AND column_name = 'tenant_id'
+    ) THEN
+      EXECUTE format('UPDATE %I SET tenant_id = $1 WHERE tenant_id IS NULL', tbl) USING mana_id;
+      GET DIAGNOSTICS row_count = ROW_COUNT;
+      IF row_count > 0 THEN
+        RAISE NOTICE 'Backfilled % rows in %', row_count, tbl;
+      END IF;
+    END IF;
+  END LOOP;
 END $$;
 
--- Backfill cms_notifications if exists
+-- =============================================
+-- PART 6: Set NOT NULL (only where safe)
+-- =============================================
+
 DO $$
-DECLARE mana_id UUID;
+DECLARE
+  tbl TEXT;
+  null_count INT;
+  tables_to_constrain TEXT[] := ARRAY[
+    'accounting_bank_transactions',
+    'accounting_facturas',
+    'accounting_cash_log',
+    'accounting_categories',
+    'accounting_bank_accounts',
+    'accounting_notifications',
+    'cases',
+    'clients',
+    'lots',
+    'brokers',
+    'payment_schedule',
+    'cms_payments',
+    'approvals'
+  ];
 BEGIN
-  SELECT id INTO mana_id FROM tenants WHERE slug = 'mana88';
-  UPDATE cms_notifications SET tenant_id = mana_id WHERE tenant_id IS NULL;
-EXCEPTION WHEN undefined_table THEN NULL;
+  FOREACH tbl IN ARRAY tables_to_constrain LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = tbl AND column_name = 'tenant_id'
+    ) THEN
+      EXECUTE format('SELECT count(*) FROM %I WHERE tenant_id IS NULL', tbl) INTO null_count;
+      IF null_count = 0 THEN
+        EXECUTE format('ALTER TABLE %I ALTER COLUMN tenant_id SET NOT NULL', tbl);
+        RAISE NOTICE 'Set NOT NULL on %.tenant_id', tbl;
+      ELSE
+        RAISE NOTICE 'WARNING: % has % NULL tenant_id rows — skipping NOT NULL', tbl, null_count;
+      END IF;
+    END IF;
+  END LOOP;
 END $$;
 
--- 5. Make tenant_id NOT NULL after backfill
-ALTER TABLE accounting_bank_transactions ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE accounting_facturas ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE accounting_cash_log ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE accounting_categories ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE accounting_bank_accounts ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE accounting_notifications ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE cases ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE clients ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE lots ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE brokers ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE payment_schedule ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE cms_payments ALTER COLUMN tenant_id SET NOT NULL;
-ALTER TABLE approvals ALTER COLUMN tenant_id SET NOT NULL;
+-- =============================================
+-- PART 7: Indexes (all dynamic SQL)
+-- =============================================
 
--- 6. Indexes for tenant_id
-CREATE INDEX IF NOT EXISTS idx_accounting_bank_transactions_tenant ON accounting_bank_transactions(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_accounting_facturas_tenant ON accounting_facturas(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_accounting_cash_log_tenant ON accounting_cash_log(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_cases_tenant ON cases(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_clients_tenant ON clients(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_lots_tenant ON lots(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_brokers_tenant ON brokers(tenant_id);
-CREATE INDEX IF NOT EXISTS idx_user_roles_user ON user_roles(user_id);
-CREATE INDEX IF NOT EXISTS idx_user_roles_tenant ON user_roles(tenant_id);
+DO $$
+DECLARE
+  tbl TEXT;
+  idx_name TEXT;
+  tables_to_index TEXT[] := ARRAY[
+    'accounting_bank_transactions',
+    'accounting_facturas',
+    'accounting_cash_log',
+    'cases',
+    'clients',
+    'lots',
+    'brokers',
+    'payment_schedule',
+    'cms_payments',
+    'approvals'
+  ];
+BEGIN
+  FOREACH tbl IN ARRAY tables_to_index LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = tbl AND column_name = 'tenant_id'
+    ) THEN
+      idx_name := 'idx_' || tbl || '_tenant';
+      IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = idx_name) THEN
+        EXECUTE format('CREATE INDEX %I ON %I(tenant_id)', idx_name, tbl);
+        RAISE NOTICE 'Created index %', idx_name;
+      END IF;
+    END IF;
+  END LOOP;
 
--- 7. RLS helper function
+  -- user_roles indexes
+  IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_user_roles_user') THEN
+    CREATE INDEX idx_user_roles_user ON user_roles(user_id);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'idx_user_roles_tenant') THEN
+    CREATE INDEX idx_user_roles_tenant ON user_roles(tenant_id);
+  END IF;
+END $$;
+
+-- =============================================
+-- PART 8: RLS helper function
+-- =============================================
+
 CREATE OR REPLACE FUNCTION get_current_tenant_id() RETURNS UUID AS $$
 BEGIN
   RETURN (
@@ -149,108 +394,112 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- 8. Enable RLS and create policies for accounting tables
-ALTER TABLE accounting_bank_transactions ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_bank_transactions;
-CREATE POLICY tenant_isolation ON accounting_bank_transactions
-  FOR ALL USING (tenant_id = get_current_tenant_id());
+-- =============================================
+-- PART 9: RLS policies (all dynamic SQL)
+-- =============================================
 
-ALTER TABLE accounting_facturas ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_facturas;
-CREATE POLICY tenant_isolation ON accounting_facturas
-  FOR ALL USING (tenant_id = get_current_tenant_id());
+DO $$
+DECLARE
+  tbl TEXT;
+  tables_for_rls TEXT[] := ARRAY[
+    'accounting_bank_transactions',
+    'accounting_facturas',
+    'accounting_cash_log',
+    'accounting_categories',
+    'accounting_bank_accounts',
+    'accounting_notifications',
+    'cases',
+    'clients',
+    'lots',
+    'brokers',
+    'payment_schedule',
+    'cms_payments',
+    'approvals'
+  ];
+BEGIN
+  FOREACH tbl IN ARRAY tables_for_rls LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = tbl AND column_name = 'tenant_id'
+    ) THEN
+      EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', tbl);
+      EXECUTE format('DROP POLICY IF EXISTS tenant_isolation ON %I', tbl);
+      EXECUTE format(
+        'CREATE POLICY tenant_isolation ON %I FOR ALL USING (tenant_id = get_current_tenant_id())',
+        tbl
+      );
+      RAISE NOTICE 'RLS enabled on %', tbl;
+    END IF;
+  END LOOP;
+END $$;
 
-ALTER TABLE accounting_cash_log ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_cash_log;
-CREATE POLICY tenant_isolation ON accounting_cash_log
-  FOR ALL USING (tenant_id = get_current_tenant_id());
+-- RLS for tenants (uses dynamic SQL to reference user_roles.tenant_id safely)
+DO $$
+BEGIN
+  ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
+  DROP POLICY IF EXISTS tenant_select ON tenants;
 
-ALTER TABLE accounting_categories ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_categories;
-CREATE POLICY tenant_isolation ON accounting_categories
-  FOR ALL USING (tenant_id = get_current_tenant_id());
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='tenant_id'
+  ) THEN
+    CREATE POLICY tenant_select ON tenants
+      FOR SELECT USING (
+        id IN (SELECT tenant_id FROM user_roles WHERE user_id = auth.uid() AND is_active = TRUE)
+      );
+    RAISE NOTICE 'RLS policy created on tenants';
+  ELSE
+    -- Fallback: allow all reads until user_roles has tenant_id
+    CREATE POLICY tenant_select ON tenants FOR SELECT USING (true);
+    RAISE NOTICE 'WARNING: user_roles missing tenant_id, using permissive tenants policy';
+  END IF;
+END $$;
 
-ALTER TABLE accounting_bank_accounts ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_bank_accounts;
-CREATE POLICY tenant_isolation ON accounting_bank_accounts
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE accounting_notifications ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON accounting_notifications;
-CREATE POLICY tenant_isolation ON accounting_notifications
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
--- RLS for CMS tables
-ALTER TABLE cases ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON cases;
-CREATE POLICY tenant_isolation ON cases
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON clients;
-CREATE POLICY tenant_isolation ON clients
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE lots ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON lots;
-CREATE POLICY tenant_isolation ON lots
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE brokers ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON brokers;
-CREATE POLICY tenant_isolation ON brokers
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE payment_schedule ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON payment_schedule;
-CREATE POLICY tenant_isolation ON payment_schedule
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE cms_payments ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON cms_payments;
-CREATE POLICY tenant_isolation ON cms_payments
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
-ALTER TABLE approvals ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_isolation ON approvals;
-CREATE POLICY tenant_isolation ON approvals
-  FOR ALL USING (tenant_id = get_current_tenant_id());
-
--- RLS for tenants and user_roles
-ALTER TABLE tenants ENABLE ROW LEVEL SECURITY;
-DROP POLICY IF EXISTS tenant_select ON tenants;
-CREATE POLICY tenant_select ON tenants
-  FOR SELECT USING (
-    id IN (SELECT tenant_id FROM user_roles WHERE user_id = auth.uid() AND is_active = TRUE)
-  );
-
+-- RLS for user_roles
 ALTER TABLE user_roles ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS user_roles_select ON user_roles;
 CREATE POLICY user_roles_select ON user_roles
   FOR SELECT USING (user_id = auth.uid());
 
--- 9. Seed existing admin users into user_roles
+-- =============================================
+-- PART 10: Seed user_roles from profiles
+-- =============================================
+
 DO $$
 DECLARE
   mana_id UUID;
+  seeded_count INT;
 BEGIN
   SELECT id INTO mana_id FROM tenants WHERE slug = 'mana88';
 
-  INSERT INTO user_roles (user_id, tenant_id, role, app_access, is_active)
-  SELECT
-    p.id,
-    mana_id,
-    COALESCE(p.role, 'viewer'),
-    '["accounting","cms","investors"]'::jsonb,
-    TRUE
-  FROM profiles p
-  WHERE NOT EXISTS (
-    SELECT 1 FROM user_roles ur WHERE ur.user_id = p.id AND ur.tenant_id = mana_id
-  );
-EXCEPTION WHEN undefined_table THEN NULL;
+  IF EXISTS (
+    SELECT 1 FROM information_schema.tables
+    WHERE table_schema = 'public' AND table_name = 'profiles'
+  ) AND EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='user_roles' AND column_name='tenant_id'
+  ) THEN
+    INSERT INTO user_roles (user_id, tenant_id, role, app_access, is_active)
+    SELECT
+      p.id,
+      mana_id,
+      COALESCE(p.role, 'viewer'),
+      '["accounting","cms","investors"]'::jsonb,
+      TRUE
+    FROM profiles p
+    WHERE NOT EXISTS (
+      SELECT 1 FROM user_roles ur WHERE ur.user_id = p.id AND ur.tenant_id = mana_id
+    )
+    ON CONFLICT DO NOTHING;
+    GET DIAGNOSTICS seeded_count = ROW_COUNT;
+    RAISE NOTICE 'Seeded % users from profiles into user_roles', seeded_count;
+  END IF;
 END $$;
 
--- 10. Updated_at trigger for tenants
+-- =============================================
+-- PART 11: Updated_at trigger
+-- =============================================
+
 CREATE OR REPLACE FUNCTION update_tenant_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -264,3 +513,12 @@ CREATE TRIGGER trigger_update_tenant_updated_at
   BEFORE UPDATE ON tenants
   FOR EACH ROW
   EXECUTE FUNCTION update_tenant_updated_at();
+
+-- =============================================
+-- VERIFY
+-- =============================================
+SELECT 'Migration complete' AS status,
+       (SELECT count(*) FROM tenants) AS tenants,
+       (SELECT count(*) FROM user_roles) AS user_roles,
+       (SELECT count(*) FROM information_schema.columns
+        WHERE table_schema='public' AND column_name='tenant_id') AS tables_with_tenant_id;
