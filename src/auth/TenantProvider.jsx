@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import { useAuth } from './useAuth.js'
 
 export const TenantContext = createContext(null)
 
@@ -18,13 +19,40 @@ const DEFAULT_TENANT = {
 
 /**
  * Tenant context + CSS custom property branding.
- * For now, always uses MANA 88 defaults.
- * When multi-tenant DB is deployed, will fetch from user_roles → tenants.
+ * Fetches tenant from DB via user's tenant_id from auth profile.
+ * Falls back to MANA 88 defaults if query fails.
  */
 export function TenantProvider({ children }) {
   const [tenant, setTenant] = useState(DEFAULT_TENANT)
+  const { profile } = useAuth()
 
-  // Apply brand CSS variables
+  // Fetch tenant from DB when profile has tenant_id
+  useEffect(() => {
+    if (!profile?.tenant_id) return
+
+    let cancelled = false
+    async function fetchTenant() {
+      try {
+        const { getSupabaseClient } = await import('./supabase.js')
+        const supabase = getSupabaseClient()
+        const { data } = await supabase
+          .from('tenants')
+          .select('*')
+          .eq('id', profile.tenant_id)
+          .single()
+
+        if (data && !cancelled) {
+          setTenant(data)
+        }
+      } catch {
+        // Keep defaults
+      }
+    }
+    fetchTenant()
+    return () => { cancelled = true }
+  }, [profile?.tenant_id])
+
+  // Apply brand CSS variables whenever tenant changes
   useEffect(() => {
     const root = document.documentElement
     root.style.setProperty('--mana-gold', tenant.brand_primary)
