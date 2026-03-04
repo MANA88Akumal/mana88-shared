@@ -1,0 +1,110 @@
+export default {
+  // Shell / Navigation
+  'shell.appSwitcher': 'Trocar aplicativo',
+  'shell.notifications': 'Notificações',
+  'shell.noNotifications': 'Sem notificações',
+  'shell.markAllRead': 'Marcar todas como lidas',
+  'shell.collapse': 'Recolher',
+  'shell.expand': 'Expandir',
+  'shell.signOut': 'Sair',
+  'shell.currentApp': 'Atual',
+
+  // Language
+  'lang.switchTo': 'Português',
+  'lang.es': 'Español',
+  'lang.en': 'English',
+  'lang.pt': 'Português',
+
+  // Common UI
+  'common.loading': 'Carregando...',
+  'common.save': 'Salvar',
+  'common.saving': 'Salvando...',
+  'common.cancel': 'Cancelar',
+  'common.delete': 'Excluir',
+  'common.edit': 'Editar',
+  'common.create': 'Criar',
+  'common.update': 'Atualizar',
+  'common.apply': 'Aplicar',
+  'common.search': 'Buscar',
+  'common.filter': 'Filtrar',
+  'common.reset': 'Redefinir',
+  'common.all': 'Todos',
+  'common.none': 'Nenhum',
+  'common.yes': 'Sim',
+  'common.no': 'Não',
+  'common.ok': 'OK',
+  'common.confirm': 'Confirmar',
+  'common.close': 'Fechar',
+  'common.back': 'Voltar',
+  'common.next': 'Próximo',
+  'common.prev': 'Anterior',
+  'common.export': 'Exportar',
+  'common.import': 'Importar',
+  'common.download': 'Baixar',
+  'common.upload': 'Enviar',
+  'common.viewAll': 'Ver todos',
+  'common.addNote': 'Adicionar nota...',
+  'common.noResults': 'Sem resultados',
+  'common.showing': 'Mostrando {{from}}-{{to}} de {{total}}',
+  'common.entries': 'Registros',
+
+  // Data fields
+  'common.date': 'Data',
+  'common.amount': 'Valor',
+  'common.type': 'Tipo',
+  'common.status': 'Status',
+  'common.actions': 'Ações',
+  'common.notes': 'Notas',
+  'common.description': 'Descrição',
+  'common.name': 'Nome',
+  'common.email': 'E-mail',
+  'common.phone': 'Telefone',
+  'common.company': 'Empresa',
+  'common.category': 'Categoria',
+  'common.total': 'Total',
+  'common.subtotal': 'Subtotal',
+  'common.net': 'Líquido',
+  'common.from': 'De',
+  'common.to': 'Até',
+
+  // Statuses
+  'status.pending': 'Pendente',
+  'status.approved': 'Aprovado',
+  'status.rejected': 'Rejeitado',
+  'status.active': 'Ativo',
+  'status.inactive': 'Inativo',
+  'status.completed': 'Concluído',
+  'status.cancelled': 'Cancelado',
+  'status.draft': 'Rascunho',
+  'status.paid': 'Pago',
+  'status.partial': 'Parcial',
+  'status.overdue': 'Vencido',
+
+  // Currency
+  'currency.mxn': 'MXN',
+  'currency.usd': 'USD',
+
+  // Time
+  'time.justNow': 'Agora mesmo',
+  'time.minutesAgo': 'há {{count}}m',
+  'time.hoursAgo': 'há {{count}}h',
+  'time.yesterday': 'Ontem',
+  'time.daysAgo': 'há {{count}} dias',
+
+  // Auth
+  'auth.signIn': 'Entrar',
+  'auth.signOut': 'Sair',
+  'auth.unauthorized': 'Não autorizado',
+  'auth.sessionExpired': 'Sessão expirada',
+
+  // Errors
+  'error.generic': 'Algo deu errado',
+  'error.network': 'Erro de conexão',
+  'error.notFound': 'Não encontrado',
+  'error.forbidden': 'Acesso negado',
+  'error.tryAgain': 'Tentar novamente',
+
+  // Confirmation
+  'confirm.delete': 'Tem certeza de que deseja excluir isso?',
+  'confirm.unsavedChanges': 'Você tem alterações não salvas. Deseja continuar?',
+}

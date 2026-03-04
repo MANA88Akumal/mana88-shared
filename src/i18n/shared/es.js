@@ -13,6 +13,7 @@ export default {
   'lang.switchTo': 'English',
   'lang.es': 'Español',
   'lang.en': 'English',
+  'lang.pt': 'Português',
 
   // Common UI
   'common.loading': 'Cargando...',

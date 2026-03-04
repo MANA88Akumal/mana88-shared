@@ -1,6 +1,7 @@
 import { createContext, useState, useCallback, useMemo } from 'react'
 import sharedEs from './shared/es.js'
 import sharedEn from './shared/en.js'
+import sharedPt from './shared/pt.js'
 
 const STORAGE_KEY = 'mana88_lang'
 
@@ -11,7 +12,7 @@ export const I18nContext = createContext()
  * App keys override shared keys when both exist.
  *
  * @param {object} props
- * @param {{ es: object, en: object }} [props.appTranslations] - App-specific keys
+ * @param {{ es: object, en: object, pt?: object }} [props.appTranslations] - App-specific keys
  * @param {React.ReactNode} props.children
  */
 export function I18nProvider({ appTranslations, children }) {
@@ -28,6 +29,7 @@ export function I18nProvider({ appTranslations, children }) {
   const langs = useMemo(() => ({
     es: { ...sharedEs, ...(appTranslations?.es || {}) },
     en: { ...sharedEn, ...(appTranslations?.en || {}) },
+    pt: { ...sharedPt, ...(appTranslations?.pt || {}) },
   }), [appTranslations])
 
   const t = useCallback((key, replacements) => {

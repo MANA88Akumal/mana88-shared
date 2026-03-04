@@ -26,6 +26,7 @@ export function Sidebar({
   userEmail,
   onSignOut,
   footerSlot,
+  t,
 }) {
   const [open, setOpen] = useState(true)
   const [collapsed, setCollapsed] = useState({})
@@ -178,7 +179,7 @@ export function Sidebar({
           <span className="flex-shrink-0 flex items-center justify-center" style={{ width: 20, height: 20, transform: open ? 'none' : 'rotate(180deg)', transition: 'transform 0.2s' }}>
             {icons.collapse}
           </span>
-          {open && <span style={{ fontSize: '0.67rem', fontWeight: 500 }}>Collapse</span>}
+          {open && <span style={{ fontSize: '0.67rem', fontWeight: 500 }}>{t ? t('shell.collapse') : 'Collapse'}</span>}
         </button>
 
         {/* Language toggle */}
@@ -194,7 +195,7 @@ export function Sidebar({
         {footerSlot && open && footerSlot}
 
         {/* Account / Sign out */}
-        <AccountMenu email={userEmail} onSignOut={onSignOut} sidebarOpen={open} />
+        <AccountMenu email={userEmail} onSignOut={onSignOut} sidebarOpen={open} t={t} />
       </div>
     </aside>
   )

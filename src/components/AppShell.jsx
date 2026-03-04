@@ -48,6 +48,7 @@ export function AppShell({
   sidebarFooterSlot,
   topBarRightSlot,
   children,
+  t,
 }) {
   return (
     <div className="h-screen flex overflow-hidden" style={{ background: palette.cream }}>
@@ -59,6 +60,7 @@ export function AppShell({
         userEmail={userEmail}
         onSignOut={onSignOut}
         footerSlot={sidebarFooterSlot}
+        t={t}
       />
 
       <div className="flex-1 flex flex-col overflow-hidden">

@@ -1,7 +1,9 @@
 import { palette } from '../theme/tokens.js'
 import { icons } from './icons.jsx'
 
-export function AccountMenu({ email, onSignOut, sidebarOpen }) {
+export function AccountMenu({ email, onSignOut, sidebarOpen, t }) {
+  const signOutLabel = t ? t('shell.signOut') : 'Sign Out'
+
   return (
     <>
       <button
@@ -20,7 +22,7 @@ export function AccountMenu({ email, onSignOut, sidebarOpen }) {
         <span className="flex-shrink-0 flex items-center justify-center" style={{ width: 20, height: 20 }}>
           {icons.logout}
         </span>
-        {sidebarOpen && <span className="text-[0.67rem] font-medium">Sign Out</span>}
+        {sidebarOpen && <span className="text-[0.67rem] font-medium">{signOutLabel}</span>}
       </button>
 
       {sidebarOpen && email && (
