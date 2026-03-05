@@ -10,7 +10,12 @@ import {
 
 export const AuthContext = createContext(null)
 
-const LOGIN_URL = 'https://login.manaakumal.com'
+function getLoginUrl() {
+  const hostname = window.location.hostname
+  if (hostname.endsWith('.terraia.io') || hostname === 'terraia.io') return 'https://login.terraia.io'
+  return 'https://login.manaakumal.com'
+}
+const LOGIN_URL = getLoginUrl()
 
 /**
  * Unified auth provider — works across all MANA 88 apps.

@@ -1,0 +1,76 @@
+/* TerraIA Semantic Theme Tokens
+   RGB triplet format enables Tailwind opacity modifiers (bg-surface-0/50)
+   and inline styles (rgb(var(--surface-0)))
+   Light = default, Dark = [data-theme="dark"] */
+
+/* Light theme (default) */
+:root {
+  --surface-0: 255 255 255;
+  --surface-1: 250 248 245;
+  --surface-2: 243 240 235;
+  --surface-3: 232 228 222;
+  --surface-invert: 26 26 26;
+
+  --border-default: 226 221 213;
+  --border-strong: 201 194 184;
+
+  --text-primary: 26 26 26;
+  --text-secondary: 92 86 80;
+  --text-tertiary: 138 131 122;
+  --text-invert: 255 255 255;
+
+  --brand-primary: 139 69 19;
+  --brand-subtle: 250 243 235;
+  --accent-primary: 212 119 42;
+  --accent-hover: 180 94 31;
+  --accent-subtle: 254 243 231;
+
+  --success: 26 127 55;
+  --success-subtle: 218 251 225;
+  --warning: 154 103 0;
+  --warning-subtle: 255 248 197;
+  --error: 207 34 46;
+  --error-subtle: 255 235 233;
+  --info: 9 105 218;
+  --info-subtle: 221 244 255;
+
+  --sidebar-bg: 28 25 23;
+  --sidebar-text: 232 228 222;
+  --sidebar-active: 212 119 42;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --surface-0: 13 17 23;
+  --surface-1: 22 27 34;
+  --surface-2: 33 38 45;
+  --surface-3: 48 54 61;
+  --surface-invert: 240 246 252;
+
+  --border-default: 48 54 61;
+  --border-strong: 72 79 88;
+
+  --text-primary: 230 237 243;
+  --text-secondary: 177 186 196;
+  --text-tertiary: 110 118 129;
+  --text-invert: 13 17 23;
+
+  --brand-primary: 196 125 74;
+  --brand-subtle: 26 15 10;
+  --accent-primary: 232 152 73;
+  --accent-hover: 212 119 42;
+  --accent-subtle: 45 24 16;
+
+  --success: 63 185 80;
+  --success-subtle: 13 17 23;
+  --warning: 210 153 34;
+  --warning-subtle: 22 27 34;
+  --error: 248 81 73;
+  --error-subtle: 22 27 34;
+  --info: 88 166 255;
+  --info-subtle: 22 27 34;
+
+  --sidebar-bg: 1 4 9;
+  --sidebar-text: 177 186 196;
+  --sidebar-active: 232 152 73;
+}

@@ -30,4 +30,5 @@ export { I18nProvider, I18nContext } from './i18n/I18nProvider.jsx'
 export { useI18n } from './i18n/useI18n.js'
 
 // Theme
-export { palette, getRuntimePalette, LOGO_URL } from './theme/tokens.js'
+export { palette, getRuntimePalette, LOGO_URL, LOGO_LIGHT_URL, themeColors, getTheme, setTheme, toggleTheme } from './theme/tokens.js'
+export { ThemeToggle } from './components/ThemeToggle.jsx'

@@ -1,3 +1,6 @@
+/* Import semantic theme tokens (light/dark) */
+@import './theme-tokens.css';
+
 /* MANA 88 default brand tokens — overridden per-tenant by TenantProvider */
 :root {
   --mana-gold: #ce9e62;

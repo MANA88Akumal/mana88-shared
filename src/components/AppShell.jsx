@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { palette } from '../theme/tokens.js'
+import { themeColors } from '../theme/tokens.js'
 import { Sidebar } from './Sidebar.jsx'
 import { TopBar } from './TopBar.jsx'
 
 /**
- * Unified application shell — wraps each MANA 88 app with sidebar + top bar + content area.
+ * Unified application shell — wraps each TerraIA app with sidebar + top bar + content area.
  *
  * Usage:
  * ```jsx
@@ -51,7 +51,7 @@ export function AppShell({
   t,
 }) {
   return (
-    <div className="h-screen flex overflow-hidden" style={{ background: palette.cream }}>
+    <div className="h-screen flex overflow-hidden" style={{ background: themeColors.bg }}>
       <Sidebar
         appSubtitle={appSubtitle}
         navSections={navSections}
@@ -70,7 +70,7 @@ export function AppShell({
           rightSlot={topBarRightSlot}
         />
 
-        <main className="flex-1 overflow-auto" style={{ background: palette.cream }}>
+        <main className="flex-1 overflow-auto" style={{ background: themeColors.bg }}>
           <div className="max-w-7xl mx-auto p-6">
             {children || <Outlet />}
           </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { palette } from '../theme/tokens.js'
+import { palette, themeColors } from '../theme/tokens.js'
 import { icons } from './icons.jsx'
 
 function getTimeAgo(dateStr) {
@@ -81,41 +81,41 @@ export function NotificationBell({
       {showPanel && (
         <div style={{
           position: 'absolute', bottom: '100%', left: sidebarOpen ? 0 : -140, marginBottom: 4,
-          width: 320, maxHeight: 400, overflowY: 'auto', background: '#fff', borderRadius: 8,
-          boxShadow: '0 8px 32px rgba(44,44,44,0.15)', border: `1px solid ${palette.border}`, zIndex: 1000,
+          width: 320, maxHeight: 400, overflowY: 'auto', background: themeColors.s, borderRadius: 8,
+          boxShadow: '0 8px 32px rgba(0,0,0,0.15)', border: `1px solid ${themeColors.border}`, zIndex: 1000,
         }}>
-          <div style={{ padding: '12px 16px', borderBottom: `1px solid ${palette.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontWeight: 600, fontSize: '0.78rem', color: palette.black }}>
+          <div style={{ padding: '12px 16px', borderBottom: `1px solid ${themeColors.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontWeight: 600, fontSize: '0.78rem', color: themeColors.t1 }}>
               {label} {unreadCount > 0 && `(${unreadCount})`}
             </span>
             {unreadCount > 0 && onMarkAllRead && (
-              <button onClick={onMarkAllRead} style={{ border: 'none', background: 'none', color: palette.gold, fontSize: '0.68rem', fontWeight: 500, cursor: 'pointer' }}>
+              <button onClick={onMarkAllRead} style={{ border: 'none', background: 'none', color: themeColors.gold, fontSize: '0.68rem', fontWeight: 500, cursor: 'pointer' }}>
                 Mark all read
               </button>
             )}
           </div>
           {notifications.length === 0 ? (
-            <div style={{ padding: 24, textAlign: 'center', color: '#9a9a9a', fontSize: '0.75rem' }}>No notifications</div>
+            <div style={{ padding: 24, textAlign: 'center', color: themeColors.t3, fontSize: '0.75rem' }}>No notifications</div>
           ) : (
             notifications.slice(0, 10).map(n => {
-              const typeColors = { approval_request: palette.gold, approved: palette.gold, rejected: palette.red, payment_complete: palette.gold }
+              const typeColors = { approval_request: themeColors.gold, approved: themeColors.gold, rejected: themeColors.error, payment_complete: themeColors.gold }
               return (
                 <div
                   key={n.id}
                   onClick={() => handleNotifClick(n)}
                   style={{
-                    padding: '10px 16px', borderBottom: `1px solid ${palette.cream}`, cursor: 'pointer',
-                    background: n.status !== 'read' ? 'rgba(206,158,98,0.06)' : '#fff',
+                    padding: '10px 16px', borderBottom: `1px solid ${themeColors.s2}`, cursor: 'pointer',
+                    background: n.status !== 'read' ? themeColors.accentSubtle : themeColors.s,
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = palette.cream }}
-                  onMouseLeave={e => { e.currentTarget.style.background = n.status !== 'read' ? 'rgba(206,158,98,0.06)' : '#fff' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = themeColors.s2 }}
+                  onMouseLeave={e => { e.currentTarget.style.background = n.status !== 'read' ? themeColors.accentSubtle : themeColors.s }}
                 >
                   <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                    <span style={{ width: 6, height: 6, borderRadius: 3, background: typeColors[n.notification_type] || palette.silver, marginTop: 5, flexShrink: 0 }} />
+                    <span style={{ width: 6, height: 6, borderRadius: 3, background: typeColors[n.notification_type] || themeColors.info, marginTop: 5, flexShrink: 0 }} />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.72rem', fontWeight: n.status !== 'read' ? 600 : 400, color: palette.black, lineHeight: 1.3 }}>{n.subject || n.title}</div>
-                      {n.body && <div style={{ fontSize: '0.62rem', color: '#9a9a9a', marginTop: 1, lineHeight: 1.3 }}>{n.body}</div>}
-                      <div style={{ fontSize: '0.62rem', color: '#9a9a9a', marginTop: 2 }}>{getTimeAgo(n.created_at)}</div>
+                      <div style={{ fontSize: '0.72rem', fontWeight: n.status !== 'read' ? 600 : 400, color: themeColors.t1, lineHeight: 1.3 }}>{n.subject || n.title}</div>
+                      {n.body && <div style={{ fontSize: '0.62rem', color: themeColors.t3, marginTop: 1, lineHeight: 1.3 }}>{n.body}</div>}
+                      <div style={{ fontSize: '0.62rem', color: themeColors.t3, marginTop: 2 }}>{getTimeAgo(n.created_at)}</div>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { palette } from '../theme/tokens.js'
+import { themeColors } from '../theme/tokens.js'
 import { AppSwitcher } from './AppSwitcher.jsx'
 
 /**
@@ -14,8 +14,8 @@ export function TopBar({ appId, appAccess, rightSlot }) {
       className="flex items-center justify-between px-4 border-b"
       style={{
         height: 44,
-        borderColor: palette.border,
-        background: '#fff',
+        borderColor: themeColors.border,
+        background: themeColors.s,
       }}
     >
       <AppSwitcher currentAppId={appId} appAccess={appAccess} />
