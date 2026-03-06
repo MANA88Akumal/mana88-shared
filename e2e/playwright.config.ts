@@ -48,6 +48,13 @@ export default defineConfig({
       },
     },
     {
+      name: 'login',
+      testMatch: ['auth.spec.ts', 'i18n.spec.ts', 'sign-out.spec.ts'],
+      use: {
+        baseURL: 'https://login.manaakumal.com',
+      },
+    },
+    {
       name: 'cross-app',
       testMatch: ['cross-app-sso.spec.ts', 'app-switcher.spec.ts'],
     },
