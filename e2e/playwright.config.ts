@@ -69,6 +69,17 @@ export default defineConfig({
       },
     },
     {
+      name: 'altavista-walkthrough',
+      testMatch: ['altavista-walkthrough.spec.ts'],
+      timeout: 300_000,
+      use: {
+        baseURL: 'https://login.terraia.io',
+        video: { mode: 'on', size: { width: 1920, height: 1080 } },
+        viewport: { width: 1920, height: 1080 },
+        screenshot: 'on',
+      },
+    },
+    {
       name: 'cross-app',
       testMatch: ['cross-app-sso.spec.ts', 'app-switcher.spec.ts'],
     },

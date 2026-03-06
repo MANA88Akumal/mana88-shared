@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EstadoDeCuenta xmlns="http://www.hsbc.com.mx/bankstatement/v2">
+  <Encabezado>
+    <NombreTitular>GRUPO ALTAVISTA SA DE CV</NombreTitular>
+    <RFC>GAL240115AB3</RFC>
+    <NumeroCuenta>0123456789012345</NumeroCuenta>
+    <CLABE>021910012345678901</CLABE>
+    <Banco>HSBC Mexico S.A. Institucion de Banca Multiple</Banco>
+    <TipoCuenta>Cuenta Empresarial Constructora</TipoCuenta>
+    <PeriodoInicio>2025-07-01</PeriodoInicio>
+    <PeriodoFin>2026-04-30</PeriodoFin>
+    <TotalCargos>5505005.00</TotalCargos>
+    <TotalAbonos>3280000.00</TotalAbonos>
+  </Encabezado>
+  <Movimientos>
+    <Movimiento>
+      <FechaOperacion>2025-09-01</FechaOperacion>
+      <FechaValor>2025-09-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05043</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-03</FechaOperacion>
+      <FechaValor>2025-09-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05032</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>920000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-04</FechaOperacion>
+      <FechaValor>2025-09-04</FechaValor>
+      <Descripcion>Acero Monterrey S.A.</Descripcion>
+      <Referencia>TXN05038</Referencia>
+      <Cargo>140823.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-04</FechaOperacion>
+      <FechaValor>2025-09-04</FechaValor>
+      <Descripcion>Pinturas COMEX</Descripcion>
+      <Referencia>TXN05039</Referencia>
+      <Cargo>88079.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-05</FechaOperacion>
+      <FechaValor>2025-09-05</FechaValor>
+      <Descripcion>Pinturas COMEX</Descripcion>
+      <Referencia>TXN05036</Referencia>
+      <Cargo>121809.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-05</FechaOperacion>
+      <FechaValor>2025-09-05</FechaValor>
+      <Descripcion>HSBC INTERESES CREDITO CONSTRUCTOR</Descripcion>
+      <Referencia>TXN05042</Referencia>
+      <Cargo>91000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Financing</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-06</FechaOperacion>
+      <FechaValor>2025-09-06</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05041</Referencia>
+      <Cargo>102650.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-10</FechaOperacion>
+      <FechaValor>2025-09-10</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05040</Referencia>
+      <Cargo>99325.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-12</FechaOperacion>
+      <FechaValor>2025-09-12</FechaValor>
+      <Descripcion>Topografía QR</Descripcion>
+      <Referencia>TXN05034</Referencia>
+      <Cargo>84494.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-13</FechaOperacion>
+      <FechaValor>2025-09-13</FechaValor>
+      <Descripcion>Pinturas COMEX</Descripcion>
+      <Referencia>TXN05033</Referencia>
+      <Cargo>106415.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-20</FechaOperacion>
+      <FechaValor>2025-09-20</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05037</Referencia>
+      <Cargo>98558.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-09-30</FechaOperacion>
+      <FechaValor>2025-09-30</FechaValor>
+      <Descripcion>Grupo ICON Construcciones</Descripcion>
+      <Referencia>TXN05035</Referencia>
+      <Cargo>107848.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-01</FechaOperacion>
+      <FechaValor>2025-10-01</FechaValor>
+      <Descripcion>Grupo ICON Construcciones</Descripcion>
+      <Referencia>TXN05046</Referencia>
+      <Cargo>125369.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-01</FechaOperacion>
+      <FechaValor>2025-10-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05055</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-03</FechaOperacion>
+      <FechaValor>2025-10-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05044</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>920000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-05</FechaOperacion>
+      <FechaValor>2025-10-05</FechaValor>
+      <Descripcion>HSBC INTERESES CREDITO CONSTRUCTOR</Descripcion>
+      <Referencia>TXN05054</Referencia>
+      <Cargo>91000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Financing</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-06</FechaOperacion>
+      <FechaValor>2025-10-06</FechaValor>
+      <Descripcion>Grupo ICON Construcciones</Descripcion>
+      <Referencia>TXN05053</Referencia>
+      <Cargo>112991.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-11</FechaOperacion>
+      <FechaValor>2025-10-11</FechaValor>
+      <Descripcion>Multivac HVAC Systems</Descripcion>
+      <Referencia>TXN05047</Referencia>
+      <Cargo>90992.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-11</FechaOperacion>
+      <FechaValor>2025-10-11</FechaValor>
+      <Descripcion>Serfimex Capital</Descripcion>
+      <Referencia>TXN05049</Referencia>
+      <Cargo>85774.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-13</FechaOperacion>
+      <FechaValor>2025-10-13</FechaValor>
+      <Descripcion>Serfimex Capital</Descripcion>
+      <Referencia>TXN05048</Referencia>
+      <Cargo>102017.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-13</FechaOperacion>
+      <FechaValor>2025-10-13</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05050</Referencia>
+      <Cargo>87225.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-17</FechaOperacion>
+      <FechaValor>2025-10-17</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05045</Referencia>
+      <Cargo>128045.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-18</FechaOperacion>
+      <FechaValor>2025-10-18</FechaValor>
+      <Descripcion>Vitro Arquitectónico</Descripcion>
+      <Referencia>TXN05052</Referencia>
+      <Cargo>93601.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-10-27</FechaOperacion>
+      <FechaValor>2025-10-27</FechaValor>
+      <Descripcion>Bufete Jurídico Cancún</Descripcion>
+      <Referencia>TXN05051</Referencia>
+      <Cargo>123987.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-01</FechaOperacion>
+      <FechaValor>2026-02-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05068</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-03</FechaOperacion>
+      <FechaValor>2026-02-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05056</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>1080000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-05</FechaOperacion>
+      <FechaValor>2026-02-05</FechaValor>
+      <Descripcion>HSBC INTERESES CREDITO CONSTRUCTOR</Descripcion>
+      <Referencia>TXN05067</Referencia>
+      <Cargo>91000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Financing</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-09</FechaOperacion>
+      <FechaValor>2026-02-09</FechaValor>
+      <Descripcion>Vitro Arquitectónico</Descripcion>
+      <Referencia>TXN05061</Referencia>
+      <Cargo>109426.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-09</FechaOperacion>
+      <FechaValor>2026-02-09</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05066</Referencia>
+      <Cargo>83243.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-13</FechaOperacion>
+      <FechaValor>2026-02-13</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05058</Referencia>
+      <Cargo>94057.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-15</FechaOperacion>
+      <FechaValor>2026-02-15</FechaValor>
+      <Descripcion>Vitro Arquitectónico</Descripcion>
+      <Referencia>TXN05059</Referencia>
+      <Cargo>96785.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-15</FechaOperacion>
+      <FechaValor>2026-02-15</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05060</Referencia>
+      <Cargo>88820.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-17</FechaOperacion>
+      <FechaValor>2026-02-17</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05062</Referencia>
+      <Cargo>109368.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-18</FechaOperacion>
+      <FechaValor>2026-02-18</FechaValor>
+      <Descripcion>Pinturas COMEX</Descripcion>
+      <Referencia>TXN05065</Referencia>
+      <Cargo>113416.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-22</FechaOperacion>
+      <FechaValor>2026-02-22</FechaValor>
+      <Descripcion>Despacho Notarial Reyes</Descripcion>
+      <Referencia>TXN05063</Referencia>
+      <Cargo>88774.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-26</FechaOperacion>
+      <FechaValor>2026-02-26</FechaValor>
+      <Descripcion>Domótica Premium</Descripcion>
+      <Referencia>TXN05057</Referencia>
+      <Cargo>113472.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-02-26</FechaOperacion>
+      <FechaValor>2026-02-26</FechaValor>
+      <Descripcion>Topografía QR</Descripcion>
+      <Referencia>TXN05064</Referencia>
+      <Cargo>122640.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-01</FechaOperacion>
+      <FechaValor>2026-03-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05081</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-03</FechaOperacion>
+      <FechaValor>2026-03-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05069</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>180000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-05</FechaOperacion>
+      <FechaValor>2026-03-05</FechaValor>
+      <Descripcion>HSBC INTERESES CREDITO CONSTRUCTOR</Descripcion>
+      <Referencia>TXN05080</Referencia>
+      <Cargo>91000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Financing</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-12</FechaOperacion>
+      <FechaValor>2026-03-12</FechaValor>
+      <Descripcion>CEMEX S.A. de C.V.</Descripcion>
+      <Referencia>TXN05071</Referencia>
+      <Cargo>107075.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-14</FechaOperacion>
+      <FechaValor>2026-03-14</FechaValor>
+      <Descripcion>Bufete Jurídico Cancún</Descripcion>
+      <Referencia>TXN05079</Referencia>
+      <Cargo>90740.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-22</FechaOperacion>
+      <FechaValor>2026-03-22</FechaValor>
+      <Descripcion>Bufete Jurídico Cancún</Descripcion>
+      <Referencia>TXN05072</Referencia>
+      <Cargo>104304.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-22</FechaOperacion>
+      <FechaValor>2026-03-22</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05077</Referencia>
+      <Cargo>107577.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-23</FechaOperacion>
+      <FechaValor>2026-03-23</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05073</Referencia>
+      <Cargo>85017.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-24</FechaOperacion>
+      <FechaValor>2026-03-24</FechaValor>
+      <Descripcion>Domótica Premium</Descripcion>
+      <Referencia>TXN05078</Referencia>
+      <Cargo>94274.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-26</FechaOperacion>
+      <FechaValor>2026-03-26</FechaValor>
+      <Descripcion>Herrería y Cancelería Luna</Descripcion>
+      <Referencia>TXN05076</Referencia>
+      <Cargo>126383.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-29</FechaOperacion>
+      <FechaValor>2026-03-29</FechaValor>
+      <Descripcion>Multivac HVAC Systems</Descripcion>
+      <Referencia>TXN05070</Referencia>
+      <Cargo>92471.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-29</FechaOperacion>
+      <FechaValor>2026-03-29</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05075</Referencia>
+      <Cargo>103910.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-03-31</FechaOperacion>
+      <FechaValor>2026-03-31</FechaValor>
+      <Descripcion>Multivac HVAC Systems</Descripcion>
+      <Referencia>TXN05074</Referencia>
+      <Cargo>108249.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-01</FechaOperacion>
+      <FechaValor>2026-04-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05097</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-02</FechaOperacion>
+      <FechaValor>2026-04-02</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05088</Referencia>
+      <Cargo>89188.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-03</FechaOperacion>
+      <FechaValor>2026-04-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05082</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>180000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-03</FechaOperacion>
+      <FechaValor>2026-04-03</FechaValor>
+      <Descripcion>Grupo ICON Construcciones</Descripcion>
+      <Referencia>TXN05087</Referencia>
+      <Cargo>71642.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-04</FechaOperacion>
+      <FechaValor>2026-04-04</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05086</Referencia>
+      <Cargo>56645.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-05</FechaOperacion>
+      <FechaValor>2026-04-05</FechaValor>
+      <Descripcion>HSBC INTERESES CREDITO CONSTRUCTOR</Descripcion>
+      <Referencia>TXN05096</Referencia>
+      <Cargo>91000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Financing</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-07</FechaOperacion>
+      <FechaValor>2026-04-07</FechaValor>
+      <Descripcion>CEMEX S.A. de C.V.</Descripcion>
+      <Referencia>TXN05085</Referencia>
+      <Cargo>82371.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-07</FechaOperacion>
+      <FechaValor>2026-04-07</FechaValor>
+      <Descripcion>Acero Monterrey S.A.</Descripcion>
+      <Referencia>TXN05091</Referencia>
+      <Cargo>94647.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-09</FechaOperacion>
+      <FechaValor>2026-04-09</FechaValor>
+      <Descripcion>Ing. Civil Flores & Asoc.</Descripcion>
+      <Referencia>TXN05094</Referencia>
+      <Cargo>92887.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-10</FechaOperacion>
+      <FechaValor>2026-04-10</FechaValor>
+      <Descripcion>Bufete Jurídico Cancún</Descripcion>
+      <Referencia>TXN05089</Referencia>
+      <Cargo>92837.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-11</FechaOperacion>
+      <FechaValor>2026-04-11</FechaValor>
+      <Descripcion>Pinturas COMEX</Descripcion>
+      <Referencia>TXN05095</Referencia>
+      <Cargo>92419.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-13</FechaOperacion>
+      <FechaValor>2026-04-13</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05093</Referencia>
+      <Cargo>66539.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-15</FechaOperacion>
+      <FechaValor>2026-04-15</FechaValor>
+      <Descripcion>Electro Instalaciones Caribe</Descripcion>
+      <Referencia>TXN05083</Referencia>
+      <Cargo>75977.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-17</FechaOperacion>
+      <FechaValor>2026-04-17</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05084</Referencia>
+      <Cargo>62030.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-18</FechaOperacion>
+      <FechaValor>2026-04-18</FechaValor>
+      <Descripcion>Jardinería Tropical QR</Descripcion>
+      <Referencia>TXN05090</Referencia>
+      <Cargo>64699.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2026-04-28</FechaOperacion>
+      <FechaValor>2026-04-28</FechaValor>
+      <Descripcion>Serfimex Capital</Descripcion>
+      <Referencia>TXN05092</Referencia>
+      <Cargo>78121.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+  </Movimientos>
+</EstadoDeCuenta>

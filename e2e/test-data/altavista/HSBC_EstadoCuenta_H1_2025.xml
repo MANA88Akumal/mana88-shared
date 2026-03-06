@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EstadoDeCuenta xmlns="http://www.hsbc.com.mx/bankstatement/v2">
+  <Encabezado>
+    <NombreTitular>GRUPO ALTAVISTA SA DE CV</NombreTitular>
+    <RFC>GAL240115AB3</RFC>
+    <NumeroCuenta>0123456789012345</NumeroCuenta>
+    <CLABE>021910012345678901</CLABE>
+    <Banco>HSBC Mexico S.A. Institucion de Banca Multiple</Banco>
+    <TipoCuenta>Cuenta Empresarial Constructora</TipoCuenta>
+    <PeriodoInicio>2025-02-01</PeriodoInicio>
+    <PeriodoFin>2025-06-30</PeriodoFin>
+    <TotalCargos>1416000.00</TotalCargos>
+    <TotalAbonos>3740000.00</TotalAbonos>
+  </Encabezado>
+  <Movimientos>
+    <Movimiento>
+      <FechaOperacion>2025-02-01</FechaOperacion>
+      <FechaValor>2025-02-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05015</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-02</FechaOperacion>
+      <FechaValor>2025-02-02</FechaValor>
+      <Descripcion>APORTACION CAPITAL GRUPO ALTAVISTA SA</Descripcion>
+      <Referencia>TXN05001</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>280000.00</Abono>
+      <Categoria>Equity</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-03</FechaOperacion>
+      <FechaValor>2025-02-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05000</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>480000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-03</FechaOperacion>
+      <FechaValor>2025-02-03</FechaValor>
+      <Descripcion>Instalaciones Hidráulicas QR</Descripcion>
+      <Referencia>TXN05013</Referencia>
+      <Cargo>85490.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-05</FechaOperacion>
+      <FechaValor>2025-02-05</FechaValor>
+      <Descripcion>Ing. Civil Flores & Asoc.</Descripcion>
+      <Referencia>TXN05010</Referencia>
+      <Cargo>81045.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-11</FechaOperacion>
+      <FechaValor>2025-02-11</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05004</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-17</FechaOperacion>
+      <FechaValor>2025-02-17</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05002</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-17</FechaOperacion>
+      <FechaValor>2025-02-17</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05003</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-22</FechaOperacion>
+      <FechaValor>2025-02-22</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05011</Referencia>
+      <Cargo>89146.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-22</FechaOperacion>
+      <FechaValor>2025-02-22</FechaValor>
+      <Descripcion>Vitro Arquitectónico</Descripcion>
+      <Referencia>TXN05014</Referencia>
+      <Cargo>65225.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-24</FechaOperacion>
+      <FechaValor>2025-02-24</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05005</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-24</FechaOperacion>
+      <FechaValor>2025-02-24</FechaValor>
+      <Descripcion>Multivac HVAC Systems</Descripcion>
+      <Referencia>TXN05006</Referencia>
+      <Cargo>66695.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-26</FechaOperacion>
+      <FechaValor>2025-02-26</FechaValor>
+      <Descripcion>Bufete Jurídico Cancún</Descripcion>
+      <Referencia>TXN05007</Referencia>
+      <Cargo>62063.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-27</FechaOperacion>
+      <FechaValor>2025-02-27</FechaValor>
+      <Descripcion>Serfimex Capital</Descripcion>
+      <Referencia>TXN05008</Referencia>
+      <Cargo>59835.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-28</FechaOperacion>
+      <FechaValor>2025-02-28</FechaValor>
+      <Descripcion>Multivac HVAC Systems</Descripcion>
+      <Referencia>TXN05009</Referencia>
+      <Cargo>90509.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-02-28</FechaOperacion>
+      <FechaValor>2025-02-28</FechaValor>
+      <Descripcion>Despacho Notarial Reyes</Descripcion>
+      <Referencia>TXN05012</Referencia>
+      <Cargo>59991.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-01</FechaOperacion>
+      <FechaValor>2025-03-01</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05027</Referencia>
+      <Cargo>63864.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-01</FechaOperacion>
+      <FechaValor>2025-03-01</FechaValor>
+      <Descripcion>NOMINA PERSONAL ADMINISTRATIVO</Descripcion>
+      <Referencia>TXN05031</Referencia>
+      <Cargo>18000.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Operating</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-02</FechaOperacion>
+      <FechaValor>2025-03-02</FechaValor>
+      <Descripcion>Acero Monterrey S.A.</Descripcion>
+      <Referencia>TXN05026</Referencia>
+      <Cargo>78865.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-03</FechaOperacion>
+      <FechaValor>2025-03-03</FechaValor>
+      <Descripcion>DISPOSICION CREDITO CONSTRUCTOR HSBC MEXICO</Descripcion>
+      <Referencia>TXN05016</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>680000.00</Abono>
+      <Categoria>Loan Draw</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-03</FechaOperacion>
+      <FechaValor>2025-03-03</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05029</Referencia>
+      <Cargo>56996.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-06</FechaOperacion>
+      <FechaValor>2025-03-06</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05020</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-15</FechaOperacion>
+      <FechaValor>2025-03-15</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05018</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-16</FechaOperacion>
+      <FechaValor>2025-03-16</FechaValor>
+      <Descripcion>Arq. Rodrigo Castellanos</Descripcion>
+      <Referencia>TXN05028</Referencia>
+      <Cargo>76247.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-17</FechaOperacion>
+      <FechaValor>2025-03-17</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05019</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-20</FechaOperacion>
+      <FechaValor>2025-03-20</FechaValor>
+      <Descripcion>DEPOSITO PREVENTA UNIDAD ENGANCHE 10%</Descripcion>
+      <Referencia>TXN05017</Referencia>
+      <Cargo>0.00</Cargo>
+      <Abono>287500.00</Abono>
+      <Categoria>Pre-Sale</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-20</FechaOperacion>
+      <FechaValor>2025-03-20</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05023</Referencia>
+      <Cargo>71559.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-21</FechaOperacion>
+      <FechaValor>2025-03-21</FechaValor>
+      <Descripcion>Vitro Arquitectónico</Descripcion>
+      <Referencia>TXN05030</Referencia>
+      <Cargo>60637.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-22</FechaOperacion>
+      <FechaValor>2025-03-22</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05025</Referencia>
+      <Cargo>58376.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-24</FechaOperacion>
+      <FechaValor>2025-03-24</FechaValor>
+      <Descripcion>Ing. Civil Flores & Asoc.</Descripcion>
+      <Referencia>TXN05022</Referencia>
+      <Cargo>74492.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-31</FechaOperacion>
+      <FechaValor>2025-03-31</FechaValor>
+      <Descripcion>Elevadores OTIS México</Descripcion>
+      <Referencia>TXN05021</Referencia>
+      <Cargo>80704.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+    <Movimiento>
+      <FechaOperacion>2025-03-31</FechaOperacion>
+      <FechaValor>2025-03-31</FechaValor>
+      <Descripcion>Instalaciones Hidráulicas QR</Descripcion>
+      <Referencia>TXN05024</Referencia>
+      <Cargo>98261.00</Cargo>
+      <Abono>0.00</Abono>
+      <Categoria>Construction</Categoria>
+    </Movimiento>
+  </Movimientos>
+</EstadoDeCuenta>
